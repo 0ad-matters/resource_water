@@ -1,12 +1,14 @@
 {
 	"code": "water",
 	"name": "Water",
+	"description": "Get from water",
 	"order": 5,
 	"subtypes": {
 		"fresh": "Fresh Water",
 		"salt": "Salt Water",
 		"dirty": "Dirty Water"
 	},
+	"properties": ["barterable", "tradable", "tributable"],
 	"truePrice": 100,
 	"aiAnalysisInfluenceGroup": "ignore"
 }

@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Entity parent="template_entity_full">
-  <Armour>
-    <Hack>1</Hack>
-    <Pierce>1</Pierce>
-    <Crush>15</Crush>
-  </Armour>
+<Entity>
+  <AIProxy/>
   <Cost>
     <Population>1</Population>
-    <PopulationBonus>0</PopulationBonus>
     <BuildTime>1</BuildTime>
     <Resources>
       <food>0</food>
@@ -20,36 +15,31 @@
   <Decay>
     <Active>false</Active>
     <SinkingAnim>false</SinkingAnim>
-    <DelayTime>80.0</DelayTime>
+    <DelayTime>30.0</DelayTime>
     <SinkRate>0.01</SinkRate>
     <SinkAccel>0.0</SinkAccel>
   </Decay>
   <Footprint>
     <Circle radius="1.5"/>
-    <Height>2.5</Height>
+    <Height>4.0</Height>
   </Footprint>
+  <Garrisonable>
+    <Size>1</Size>
+  </Garrisonable>
   <Guard/>
   <Health>
     <DeathType>corpse</DeathType>
     <Max>100</Max>
     <RegenRate>0</RegenRate>
     <IdleRegenRate>0</IdleRegenRate>
-    <Undeletable>false</Undeletable>
     <Unhealable>false</Unhealable>
   </Health>
   <Identity>
+    <Civ>gaia</Civ>
+    <Classes datatype="tokens">Unit Organic ConquestCritical</Classes>
     <GenericName>Unit</GenericName>
-    <Classes datatype="tokens">Unit ConquestCritical</Classes>
-    <Formations datatype="tokens">
-      formations/null
-      formations/box
-      formations/column_closed
-      formations/line_closed
-      formations/column_open
-      formations/line_open
-      formations/flank
-      formations/battle_line
-    </Formations>
+    <Phenotype datatype="tokens">male</Phenotype>
+    <Undeletable>false</Undeletable>
   </Identity>
   <Looter/>
   <Minimap>
@@ -64,33 +54,43 @@
     <BlockConstruction>true</BlockConstruction>
     <DisableBlockMovement>false</DisableBlockMovement>
     <DisableBlockPathfinding>false</DisableBlockPathfinding>
+    <DeleteUponConstruction>false</DeleteUponConstruction>
   </Obstruction>
   <OverlayRenderer/>
-  <ResourceGatherer>
-    <MaxDistance>2.0</MaxDistance>
-    <BaseSpeed>1.0</BaseSpeed>
-    <Rates>
-      <treasure>1</treasure>
-    </Rates>
-    <Capacities>
-      <food>10</food>
-      <wood>10</wood>
-      <stone>10</stone>
-      <metal>10</metal>
-      <water>10</water>
-    </Capacities>
-  </ResourceGatherer>
+  <Ownership/>
+  <Position>
+    <Altitude>0</Altitude>
+    <Anchor>pitch</Anchor>
+    <Floating>false</Floating>
+    <FloatDepth>0.0</FloatDepth>
+    <TurnRate>14</TurnRate>
+  </Position>
+  <RangeOverlayManager/>
+  <RangeOverlayRenderer/>
+  <Resistance>
+    <Entity>
+      <Damage>
+        <Hack>1</Hack>
+        <Pierce>1</Pierce>
+        <Crush>1</Crush>
+      </Damage>
+    </Entity>
+  </Resistance>
   <Selectable>
     <Overlay>
       <Texture>
-        <MainTexture>circle/128x128.png</MainTexture>
-        <MainTextureMask>circle/128x128_mask.png</MainTextureMask>
+        <MainTexture>128x128/ellipse.png</MainTexture>
+        <MainTextureMask>128x128/ellipse_mask.png</MainTextureMask>
       </Texture>
     </Overlay>
   </Selectable>
   <Sound>
     <SoundGroups>
       <attacked>interface/alarm/alarm_attackplayer.xml</attacked>
+      <attacked_gaia>interface/alarm/alarm_attacked_gaia.xml</attacked_gaia>
+      <attacked_capture>interface/alarm/alarm_attackplayer.xml</attacked_capture>
+      <attacked_capture_gaia>interface/alarm/alarm_attacked_gaia.xml</attacked_capture_gaia>
+      <order_collect_treasure>voice/{lang}/civ/civ_{phenotype}_collect_treasure.xml</order_collect_treasure>
     </SoundGroups>
   </Sound>
   <StatusBars>
@@ -98,24 +98,37 @@
     <BarHeight>0.333</BarHeight>
     <HeightOffset>5.0</HeightOffset>
   </StatusBars>
+  <StatusEffectsReceiver/>
+  <TreasureCollector>
+    <MaxDistance>2</MaxDistance>
+  </TreasureCollector>
   <UnitAI>
-    <AlertReactiveLevel>2</AlertReactiveLevel>
     <DefaultStance>aggressive</DefaultStance>
     <FleeDistance>12.0</FleeDistance>
     <FormationController>false</FormationController>
     <CanGuard>true</CanGuard>
+    <CanPatrol>true</CanPatrol>
+    <PatrolWaitTime>1</PatrolWaitTime>
+    <CheeringTime>2800</CheeringTime>
+    <Formations datatype="tokens">
+      special/formations/null
+      special/formations/box
+      special/formations/column_closed
+      special/formations/line_closed
+      special/formations/column_open
+      special/formations/line_open
+      special/formations/flank
+      special/formations/battle_line
+    </Formations>
   </UnitAI>
   <UnitMotion>
     <FormationController>false</FormationController>
-    <WalkSpeed>9</WalkSpeed>
-    <Run>
-      <Speed>15.0</Speed>
-      <Range>50.0</Range>
-      <RangeMin>0.0</RangeMin>
-      <RegenTime>0.1</RegenTime>
-      <DecayTime>0.2</DecayTime>
-    </Run>
     <PassabilityClass>default</PassabilityClass>
+    <WalkSpeed>9</WalkSpeed>
+    <RunMultiplier>1.67</RunMultiplier>
+    <InstantTurnAngle>1.5</InstantTurnAngle>
+    <Acceleration>35</Acceleration>
+    <Weight>10</Weight>
   </UnitMotion>
   <Visibility>
     <RetainInFog>false</RetainInFog>
@@ -126,6 +139,9 @@
   <Vision>
     <Range>12</Range>
   </Vision>
+  <VisionSharing>
+    <Bribable>false</Bribable>
+  </VisionSharing>
   <VisualActor>
     <SilhouetteDisplay>true</SilhouetteDisplay>
     <SilhouetteOccluder>false</SilhouetteOccluder>
